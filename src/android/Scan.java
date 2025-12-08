@@ -93,16 +93,18 @@ public class Scan extends CordovaPlugin {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+    super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE && resultCode == cordova.getActivity().RESULT_OK) {
-            Uri uri = data.getExtras().getParcelable(ScanConstants.SCANNED_RESULT);
-            if (uri != null) {
-                String fileLocation = "file://" + FileHelper.getRealPath(uri, this.cordova);
-                if(returnBase64) {
+           // Uri uri = data.getExtras().getParcelable(ScanConstants.SCANNED_RESULT);
+            String path = data.getExtras().getString(ScanConstants.SCANNED_RESULT);
+            if (path != null) {
+               // String fileLocation = "file://" + FileHelper.getRealPath(uri, this.cordova);
+                String fileLocation = "file://" + path;
+               /* if(returnBase64) {
                     this.callbackContext.success(convertUrlToBase64(fileLocation));
-                } else {
+                } else {*/
                     this.callbackContext.success(fileLocation);
-                }
+              //  }
             } else {
                 this.callbackContext.error("null data from scan libary");
             }
