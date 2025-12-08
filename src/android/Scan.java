@@ -32,6 +32,7 @@ public class Scan extends CordovaPlugin {
     private int srcType;
     private int quality;
     private boolean returnBase64;
+     private String selectedFile = "";
 
     public CallbackContext callbackContext;
 
@@ -54,6 +55,7 @@ public class Scan extends CordovaPlugin {
             this.srcType = args.getInt(0); 
             this.quality = args.getInt(2);
             this.returnBase64 = args.getBoolean(3);
+            this.selectedFile = args.getString(4);
             this.callbackContext = callbackContext;
 
             cordova.setActivityResultCallback(this);
@@ -68,6 +70,7 @@ public class Scan extends CordovaPlugin {
                 Intent intent = new Intent(cordova.getActivity().getApplicationContext(), ScanActivity.class);
                 intent.putExtra(ScanConstants.OPEN_INTENT_PREFERENCE, preference);
                 intent.putExtra("quality", this.quality);
+                intent.putExtra("file_name", this.selectedFile);
                 cordova.getActivity().startActivityForResult(intent, REQUEST_CODE);
             } catch (IllegalArgumentException e) {
                 this.callbackContext.error("Illegal Argument Exception");
