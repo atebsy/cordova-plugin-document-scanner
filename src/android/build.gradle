@@ -7,7 +7,8 @@ allprojects {
 }
 
 dependencies {
-	implementation 'com.github.atebsy:scanlibrary:8001c10908'
+	implementation 'com.github.atebsy:scanlibrary:3c6c55b9eb'
 }
+
 
 
